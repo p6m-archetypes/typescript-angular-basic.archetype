@@ -26,4 +26,4 @@ jobs:
           node-version: "20"
 
       - name: Build
-        uses: p6m-actions/js-pnpm-build@v1
+        run: pnpm build
