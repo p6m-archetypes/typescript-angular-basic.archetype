@@ -1,0 +1,30 @@
+name: Build Main
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write # Required for pushing tags
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: p6m-actions/js-pnpm-setup@v1
+        with:
+          node-version: "20"
+
+      - name: Build
+        uses: p6m-actions/js-pnpm-build@v1
+
+      - name: Cut Tag
+        uses: p6m-actions/js-pnpm-cut-tag@v1
+        with:
+          version-level: "patch"

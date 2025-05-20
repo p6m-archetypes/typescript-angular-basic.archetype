@@ -1,0 +1,39 @@
+name: Cut Release Tag
+
+on:
+  workflow_dispatch:
+    inputs:
+      version-level:
+        description: "Version Level to Bump"
+        required: true
+        default: "patch"
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+
+permissions:
+  contents: write # Required for pushing tags
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: p6m-actions/js-pnpm-setup@v1
+        with:
+          node-version: "20"
+
+      - name: Cut Tag
+        uses: p6m-actions/js-pnpm-cut-tag@v1
+        with:
+          version-level: ${{'{'}}{ github.event.inputs.version-level }}
+
+      - name: Output Version Info
+        run: echo "Released version ${{'{'}}{ steps.cut-tag.outputs.version }} with tag ${{'{'}}{ steps.cut-tag.outputs.tag }}"

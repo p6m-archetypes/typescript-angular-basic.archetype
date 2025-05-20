@@ -1,0 +1,9 @@
+---
+description: "TypeScript NextJS Basic"
+authors: ["Jimmie Fulton <jimmie@ybor.ai>, Jose Pimienta <jose@ybor.ai"]
+languages: []
+frameworks: []
+tags: []
+
+requires:
+  archetect: "2.0.0"
