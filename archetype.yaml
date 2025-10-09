@@ -1,9 +1,9 @@
 ---
-description: "TypeScript NextJS Basic"
-authors: ["Jimmie Fulton <jimmie@ybor.ai>, Jose Pimienta <jose@ybor.ai"]
-languages: []
-frameworks: []
-tags: []
+description: "TypeScript Angular Frontend"
+authors: ["Ybor Technology"]
+languages: ["TypeScript"]
+frameworks: ["Angular"]
+tags: ["Frontend", "Angular"]
 
 requires:
   archetect: "2.0.0"
