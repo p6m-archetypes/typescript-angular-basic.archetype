@@ -120,6 +120,45 @@ This archetype is ideal for:
 3. **Progressive Web Apps**: Applications requiring offline support and native features
 4. **Customer Portals**: Client-facing applications with authentication and authorization
 
+## 🔌 Backend Integration Patterns
+
+This frontend application typically consumes:
+
+1. **GraphQL Gateways**: Primary recommended pattern
+   - Unified GraphQL API aggregating multiple backend services
+   - Client-driven queries reduce over-fetching
+   - Single endpoint simplifies frontend architecture
+   - Real-time updates via GraphQL subscriptions
+
+2. **REST APIs**: Traditional HTTP/JSON services
+   - Public REST APIs with OpenAPI documentation
+   - Direct service-to-frontend communication
+   - Standard HTTP verbs (GET, POST, PUT, DELETE)
+   - Works well for simple CRUD operations
+
+3. **Backend-for-Frontend (BFF)**: Dedicated backend for this frontend
+   - Custom API tailored to this application's needs
+   - Can be GraphQL or REST
+   - Aggregates multiple services on the backend
+   - Optimizes payload size and query patterns
+
+**Architecture Examples**:
+
+**Option 1: GraphQL Gateway (Recommended)**
+```
+Angular App → GraphQL Gateway → gRPC/REST Services
+```
+
+**Option 2: Direct REST API**
+```
+Angular App → REST Services → Database
+```
+
+**Option 3: BFF Pattern**
+```
+Angular App → Dedicated BFF (GraphQL/REST) → Multiple Services
+```
+
 ## 🔗 Related Archetypes
 
 - **[TypeScript Next.js](../typescript-nextjs-basic.archetype)** - React with SSR for SEO-focused apps
