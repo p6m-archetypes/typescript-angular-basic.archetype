@@ -52,7 +52,7 @@ jobs:
     with:
       github_ref: ${{'{'}}{ needs.release.outputs.tag }}
       registry: ${{'{'}}{ vars.ARTIFACTORY_HOSTNAME }}
-      image-name: {{ org-name }}-docker/applications/{{ project-name }}-server
+      image-name: ${{'{'}}{ vars.ARTIFACTORY_PROJECT }}-docker/applications/{{ project-name }}-server
       context: "."
       dockerfile: ./Dockerfile
       tags: |
