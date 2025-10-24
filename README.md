@@ -44,7 +44,7 @@ my-customer-frontend/
 archetect render https://github.com/p6m-archetypes/typescript-angular-basic.archetype.git#v1
 
 # Example prompt answers:
-# organization-name: acme-inc
+# org-name: acme-inc
 # project-title: Customer Portal
 # project-prefix: customer
 # Result: customer-frontend/
@@ -75,7 +75,7 @@ npm run build
 
 | Property | Description | Example |
 |----------|-------------|---------|
-| `organization-name` | GitHub organization or username | acme-inc |
+| `org-name` | GitHub organization or username | acme-inc |
 | `project-title` | Display name for the application | Customer Portal |
 | `project-prefix` | Project identifier (suffix '-frontend' added automatically) | customer |
 

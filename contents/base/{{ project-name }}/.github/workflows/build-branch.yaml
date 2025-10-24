@@ -35,7 +35,7 @@ jobs:
 
     with:
       registry: ${{'{'}}{ vars.ARTIFACTORY_HOSTNAME }}
-      image-name: {{ organization-name }}-docker/applications/{{ project-name }}
+      image-name: {{ org-name }}-docker/applications/{{ project-name }}
       context: "."
       dockerfile: ./Dockerfile
       tags: |

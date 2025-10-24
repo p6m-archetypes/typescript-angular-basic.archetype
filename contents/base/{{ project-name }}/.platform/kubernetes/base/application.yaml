@@ -6,7 +6,7 @@ kind: PlatformApplication
 metadata:
   name: {{ project-name }}
   labels:
-    p6m.dev/domain: '{{ organization-name }}'
+    p6m.dev/domain: '{{ org-name }}'
     p6m.dev/app: '{{ project-name }}'
 spec:
   autoscaling:
