@@ -12,6 +12,7 @@ spec:
     enabled: true
   deployment:
     image: '{{ project-name }}-server:latest' # Set to a digest in the .platform repo patch
+    readOnlyRootFilesystem: false
     ports:
       - protocol: http
         port: 80
