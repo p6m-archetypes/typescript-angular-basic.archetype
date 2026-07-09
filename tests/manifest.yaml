@@ -1,0 +1,60 @@
+# Test cases for this archetype. Each case is rendered once per pytest session
+# and shared by all tests that reference it.
+#
+# Fields:
+#   name           unique case id (shows up in test names)
+#   answers        answers file passed to `archetect render -A`, relative to tests/
+#   project_dir    directory the render is expected to produce (derived from the answers)
+#   expected_files paths (relative to project_dir) that must exist after rendering
+#   absent_files   paths (relative to project_dir) that must NOT exist after rendering
+#   requires       executables that must be on PATH for the build tier; missing -> build tests skip
+#   build_steps    commands run sequentially inside project_dir by the build tier
+#   env            extra environment variables for build_steps
+#   yaml_globs     globs (relative to project_dir) of generated files that must parse
+#                  as valid YAML; each glob must match at least one file
+cases:
+  - name: default
+    answers: answers/default.yaml
+    project_dir: customer-frontend
+    expected_files:
+      - package.json
+      - pnpm-lock.yaml
+      - angular.json
+      - tsconfig.json
+      - tsconfig.app.json
+      - tsconfig.spec.json
+      - .postcssrc.json
+      - .editorconfig
+      - src/main.ts
+      - src/index.html
+      - src/styles.css
+      - src/app/app.component.ts
+      - src/app/app.config.ts
+      - src/app/app.routes.ts
+      - Dockerfile
+      - .dockerignore
+      - .gitignore
+      - .platform/kubernetes/base/application.yaml
+      - .platform/kubernetes/base/kustomization.yaml
+      - .platform/kubernetes/dev/kustomization.yaml
+      - .platform/kubernetes/stg/kustomization.yaml
+      - .platform/kubernetes/prd/kustomization.yaml
+      - .github/workflows/build-branch.yaml
+      - .github/workflows/build-main.yaml
+      - .github/workflows/cut-tag.yaml
+      - .github/workflows/promote.yaml
+    yaml_globs:
+      - ".platform/kubernetes/**/*.yaml"
+      - ".github/workflows/*.yaml"
+    requires:
+      # The generated project ships a pnpm-lock.yaml; pnpm is its package manager.
+      # The shared reusable workflow sets up Node only, so the build tier runs
+      # locally (where pnpm is on PATH) and skips in CI.
+      - pnpm
+    build_steps:
+      # pnpm 11 exits non-zero when a dependency's build scripts are ignored;
+      # dangerouslyAllowAllBuilds lets them run so install succeeds headlessly.
+      - [pnpm, install, --frozen-lockfile, --config.dangerouslyAllowAllBuilds=true]
+      # verify-deps-before-run=false keeps pnpm's pre-run dependency check from
+      # re-triggering that same ignored-builds error before the build starts.
+      - [pnpm, --config.verify-deps-before-run=false, run, build]
