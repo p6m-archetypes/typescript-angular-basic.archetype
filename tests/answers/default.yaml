@@ -1,0 +1,8 @@
+# Headless answers for the default test case.
+# Prompt keys come from archetype.rhai (kebab-case). Anything not listed here
+# falls back to prompt defaults via `archetect render -D`.
+# project-name is derived as "{{ project-prefix }}-frontend", so this renders
+# into a "customer-frontend" directory.
+org-name: "acme"
+project-title: "Customer"
+project-prefix: "customer"
